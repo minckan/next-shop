@@ -1,3 +1,4 @@
+/** Option 1 : fetch products on the server side (in getStaticProps) */
 import Head from "next/head";
 
 const products = [
@@ -5,6 +6,12 @@ const products = [
   { id: 2, title: "Second Product" },
   { id: 3, title: "Third Product" },
 ];
+
+export async function getStaticProps() {
+  // Run Backend Code First.
+  // Use node-fetch package to fetch [http://localhost:1337/products]
+  // return object include key of 'props' and the specific data inside of it.
+}
 
 const HomePage: React.FC = () => {
   return (

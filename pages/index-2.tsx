@@ -1,4 +1,6 @@
+/** Option 2 : fetch products on the client side (in useEffect) */
 import Head from "next/head";
+import { useEffect } from "react";
 
 const products = [
   { id: 1, title: "First Product" },
@@ -7,6 +9,9 @@ const products = [
 ];
 
 const HomePage: React.FC = () => {
+  useEffect(() => {
+    // fetch data
+  }, []);
   return (
     <>
       <Head>
