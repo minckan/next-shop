@@ -1,7 +1,6 @@
-/** Option 1b: fetch products on the server side (in getStaticProps) */
-// Incremental Static Regeneration
+/** Option 1a : fetch products on the server side (in getStaticProps) */
 import Head from "next/head";
-import { getProduct } from "../lib/products";
+import { getProducts } from "../../lib/products";
 
 type HomePageProps = {
   products: {
@@ -18,14 +17,12 @@ export async function getStaticProps() {
   // return object include key of 'props' and the specific data inside of it.\
 
   // ⭐️ The Data will Pre-rendered.
-  // Incremental Static Regeneration
-  // It Only applies when running in Production mode. 프로덕션 모드일때만 적용된다.
-  const products = await getProduct();
+
+  const products = await getProducts();
   return {
     props: {
       products,
     },
-    revalidate: 10, // second
   };
 }
 

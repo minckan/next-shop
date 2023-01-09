@@ -1,6 +1,7 @@
-/** Option 1a : fetch products on the server side (in getStaticProps) */
+/** Option 1b: fetch products on the server side (in getStaticProps) */
+// Incremental Static Regeneration
 import Head from "next/head";
-import { getProduct } from "../lib/products";
+import { getProducts } from "../../lib/products";
 
 type HomePageProps = {
   products: {
@@ -17,12 +18,19 @@ export async function getStaticProps() {
   // return object include key of 'props' and the specific data inside of it.\
 
   // ⭐️ The Data will Pre-rendered.
+  // Incremental Static Regeneration
+  // It Only applies when running in Production mode. 프로덕션 모드일때만 적용된다.
 
-  const products = await getProduct();
+  // ❗️1. Learned how to use ISR to re-fetch data at regular intervals as specified by the "revalidate" option.
+  // ❗️2. re-fetch data on the server side every time the page is loaded. ==> index-1c
+
+  // 왠만한 상황에서는(데이터를 자주 수정하지 않는다면) getStaticProps를 사용하는 것이 getServerSideProps를 사용하는 것보다 낫다.
+  const products = await getProducts();
   return {
     props: {
       products,
     },
+    revalidate: 10, // second
   };
 }
 

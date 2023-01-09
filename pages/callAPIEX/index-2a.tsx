@@ -1,13 +1,13 @@
 /** Option 2 : fetch products on the client side (in useEffect) */
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { getProduct } from "../lib/products";
+import { getProducts } from "../../lib/products";
 
 const HomePage: React.FC = () => {
   const [products, setProduct] = useState([]);
   useEffect(() => {
-    const p = getProduct().then(setProduct);
-    // const p = getProduct().then(products => setProduct(products))
+    const p = getProducts().then(setProduct);
+    // const p = getProducts().then(products => setProduct(products))
   }, []);
 
   /**
@@ -17,6 +17,8 @@ const HomePage: React.FC = () => {
    *
    * 클라이언트 사이드에서 API를 호출했을 경우 모든 데이터를 리턴해야 하지만
    * 서버사이드에서 호출했을 경우에는 더 적은 필요한 데이터만 리턴하면 된다.
+   * API가 모두에게 보이도록 해야한다. 사용하지 않는 불필요한 데이터도 호출해야한다. ==> API Route를 통해서 해결!
+   *
    *
    * 반대로 클라이언트 사이드의 이점은 =>
    * 브라우저에서 바로 데이터를 패칭하게 되면 최신의 데이터를 화면에 노출할 가능성이 높아진다.
