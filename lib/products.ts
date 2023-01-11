@@ -13,7 +13,7 @@ export async function getProduct(slug: string) {
   return stripProduct(product);
 }
 
-function stripProduct(product) {
+export function stripProduct(product) {
   return {
     id: product.id,
     title: product.title,

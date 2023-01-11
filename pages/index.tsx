@@ -1,7 +1,6 @@
 /** Option 1b: fetch products on the server side (in getStaticProps) */
 // Incremental Static Regeneration
-import Head from "next/head";
-import Link from "next/link";
+import Page from "../components/Page";
 import ProductCard from "../components/ProductCard";
 import { getProducts } from "../lib/products";
 
@@ -38,21 +37,15 @@ export async function getStaticProps() {
 const HomePage: React.FC = ({ products }: HomePageProps) => {
   console.log("[HomePage] render: ", products);
   return (
-    <>
-      <Head>
-        <title>Next Shop</title>
-      </Head>
-      <main className="px-4">
-        <h1 className="text-2xl">Next Shop</h1>
-        <ul className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          {products.map((product) => (
-            <li key={product.id}>
-              <ProductCard product={product} />
-            </li>
-          ))}
-        </ul>
-      </main>
-    </>
+    <Page title="Indore Plants">
+      <ul className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {products.map((product) => (
+          <li key={product.id}>
+            <ProductCard product={product} />
+          </li>
+        ))}
+      </ul>
+    </Page>
   );
 };
 

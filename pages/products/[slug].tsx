@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { ApiError } from "../../lib/api";
+import Page from "../../components/Page";
+import { ApiError, fetchJson } from "../../lib/api";
 import { getProduct, getProducts } from "../../lib/products";
 
 /**
@@ -38,23 +39,28 @@ export async function getStaticProps({ params: { slug } }) {
   }
 }
 
-function ProductPage(props) {
-  console.log("[ProductPage] render : ", props);
+function ProductPage(product) {
+  // const user = useUser();
+  console.log("[ProductPage] render : ", product);
+
+  const AddToCart = (event) => {
+    event.preventDefault();
+  };
   return (
-    <>
-      <main className="px-6 py-4">
-        <h1 className="text-xl mb-3">{props.title}</h1>
-        <div className="flex flex-col lg:flex-row">
-          <div className="mb-2 lg:mb-0">
-            <Image src={props.pictureUrl} width={640} height={480} alt="" />
-          </div>
-          <div className="flex-1 lg:ml-4">
-            <p className="text-sm">{props.description}</p>
-            <p className="text-lg font-bold mt-2">{props.price}</p>
-          </div>
+    <Page title={product.title}>
+      <div className="flex flex-col lg:flex-row">
+        <div className="mb-2 lg:mb-0">
+          <Image src={product.pictureUrl} width={640} height={480} alt="" />
         </div>
-      </main>
-    </>
+        <div className="flex-1 lg:ml-4">
+          <p className="text-sm">{product.description}</p>
+          <p className="text-lg font-bold mt-2">{product.price}</p>
+          <button className="text-blue-700" onClick={AddToCart}>
+            ADD CART
+          </button>
+        </div>
+      </div>
+    </Page>
   );
 }
 
