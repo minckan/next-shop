@@ -44,7 +44,10 @@ function ProductPage(product) {
   console.log("[ProductPage] render : ", product);
 
   const AddToCart = (event) => {
+    console.log("[AddToCart]");
+
     event.preventDefault();
+    const response = fetchJson(`/api/cart/${product.id}`);
   };
   return (
     <Page title={product.title}>

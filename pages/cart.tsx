@@ -18,6 +18,14 @@ function CartPage() {
     })();
   }, []);
 
+  const handleDelete = (id) => {
+    try {
+      const response = fetchJson(`/api/cart/delete/${id}`);
+    } catch (error) {
+      console.log("[handleDelete] ERROR!!!: ", error);
+    }
+  };
+
   return (
     <Page title="Cart">
       {
@@ -27,7 +35,12 @@ function CartPage() {
               <li key={item.id}>
                 <p>{item.title}</p>
                 <p>{item.price}</p>
-                <button className="text-cyan-600">delete</button>
+                <button
+                  className="text-cyan-600"
+                  onClick={() => handleDelete(item.id)}
+                >
+                  delete
+                </button>
               </li>
             ))}
         </ul>
